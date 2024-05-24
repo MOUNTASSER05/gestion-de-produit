@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="menu">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Produits</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<div layout:fragment="content">
+<div class="p-3">
+    <div class="card">
+        <div class="card-header">Liste Patients</div>
+<form method="get", th:action="@{index}">
+    <input type="text" name="search" th:value="${searchName}">
+    <button class="btn btn-primary" type="submit">Search</button>
+
+</form>
+
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nom</td>
+                        <td>Description</td>
+                        <td>Prix</td>
+                        <td>Quantite</td>
+                        <td>Categorie</td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="produit:${pageProduits}">
+
+                        <td th:text="${produit.id}"></td>
+                        <td th:text="${produit.nom}"></td>
+                        <td th:text="${produit.description}"></td>
+                        <td th:text="${produit.prix}"></td>
+                        <td th:text="${produit.quantite}"></td>
+                        <td th:text="${produit.categorie}"></td>
+
+                        <td >
+                            <a class="btn btn-danger"
+                               th:href="@{delete(page=${currentPage}, size=${size}, search=${searchName}, id=${produit.id})}"> Delete </a>
+                        </td>
+
+                        <td >
+                            <a class="btn btn-outline-dark"
+                               th:href="@{edit(page=${currentPage}, size=${size}, search=${searchName}, id=${produit.id})}"> Edit </a>
+                        </td>
+
+
+
+                    </tr>
+                </tbody>
+
+
+
+
+            </table>
+<div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item me-2"
+                    th:each="p:${tabPages}" >
+                    <a th:text="${p+1}"
+                       th:class="${p==currentPage? 'btn btn-primary' : 'btn btn-outline-primary'}"
+                    th:href="@{index(page=${p}, size=${size}, search=${searchName})}"></a>
+                </li>
+
+
+            </ul>
+
+</div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
