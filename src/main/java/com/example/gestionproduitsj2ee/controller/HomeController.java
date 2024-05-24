@@ -38,7 +38,7 @@ public class HomeController {
     public String index(Model model,RedirectAttributes redirectAttributes, @ModelAttribute("connectedUser" ) User user2){
         System.out.println("# index User : "+user2);
         model.addAttribute("user", user2);
-        return "Main/index";
+        return "produits";
     }
 
 
